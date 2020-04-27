@@ -1,156 +1,152 @@
 import {
-    setRestaurantAction,
-    setRestaurantDetails,
-    setRestaurantCategory,
-    setRestaurantId,
-    addToCart,
-    clearCart,
-    refreshCart,
-} from '../actions/restaurantsActions'
-import { restaurants } from './restaurants'
+  setRestaurantAction,
+  setRestaurantDetails,
+  setRestaurantCategory,
+  setRestaurantId,
+  addToCart,
+  clearCart,
+  refreshCart,
+} from "../actions/restaurantsActions";
+import { restaurants } from "./restaurants";
 
+describe("reducer restaurants tasks", () => {
+  test("test de setRestaurantAction", () => {
+    // Preparação
+    const currentState = {
+      allRestaurants: [],
+    };
 
-describe('reducer restaurants tasks', () => {
-    test('test de setRestaurantAction', () => {
-        // Preparação
-        const currentState = {
-            allRestaurants: [],
-        }
+    const action = setRestaurantAction(["restaurants"]);
 
-        const action = setRestaurantAction(["restaurants"])
+    // Execução
+    const newState = restaurants(currentState, action);
 
-        // Execução
-        const newState = restaurants(currentState, action)
+    // Verificação
 
-        // Verificação
+    expect(newState.allRestaurants).toHaveLength(1);
+  });
 
-        expect(newState.allRestaurants).toHaveLength(1)
+  test("test de setRestaurantDetails", () => {
+    // Preparação
+    const currentState = {
+      restaurantDetails: undefined,
+    };
 
-    })
+    const action = setRestaurantDetails(["details"]);
 
-    test('test de setRestaurantDetails', () => {
-        // Preparação
-        const currentState = {
-            restaurantDetails: undefined,
-        }
+    // Execução
+    const newState = restaurants(currentState, action);
 
-        const action = setRestaurantDetails(["details"])
+    //Verificação
 
-        // Execução
-        const newState = restaurants(currentState, action)
+    expect(newState.restaurantDetails).toHaveLength(1);
+  });
 
-        //Verificação
+  test("test de setRestaurantCategory", () => {
+    // Preparação
+    const currentState = {
+      category: "",
+    };
 
-        expect(newState.restaurantDetails).toHaveLength(1)
+    const action = setRestaurantCategory(["category"]);
 
-    })
-    test('test de setRestaurantCategory', () => {
-        // Preparação
-        const currentState = {
-            category: "",
-        }
+    // Execução
+    const newState = restaurants(currentState, action);
 
-        const action = setRestaurantCategory(["category"])
+    //Verificação
 
-        // Execução
-        const newState = restaurants(currentState, action)
+    expect(newState.category).toHaveLength(1);
+  });
 
-        //Verificação
+  test("test de setRestaurantId", () => {
+    // Preparação
+    const currentState = {
+      selectedRestaurantId: "",
+    };
 
-        expect(newState.category).toHaveLength(1)
+    const action = setRestaurantId(["1"]);
 
-    })
-    test('test de setRestaurantId', () => {
-        // Preparação
-        const currentState = {
-            selectedRestaurantId: "",
-        }
+    // Execução
+    const newState = restaurants(currentState, action);
 
-        const action = setRestaurantId(["1"])
+    //Verificação
 
-        // Execução
-        const newState = restaurants(currentState, action)
+    expect(newState.selectedRestaurantId).toHaveLength(1);
+  });
 
-        //Verificação
+  test("test de addToCart", () => {
+    // Preparação
+    const currentState = {
+      cart: {
+        products: [],
+      },
+    };
 
-        expect(newState.selectedRestaurantId).toHaveLength(1)
+    const mockData = {
+      id: "5omTFSOBYiTqeiDwhiBx",
+      photoUrl: "test",
+      name: "Bibsfiha queijo",
+      description: "Esfiha deliciosa, receita secreta do Habibs.",
+      category: "Salgado",
+      price: 1,
+      quantity: "3",
+    };
 
-    })
+    const action = addToCart(mockData);
 
-    test('test de addToCart', () => {
-        // Preparação
-        const currentState = {
-            cart: {
-                products: [],
-            },
-        }
+    // Execução
+    const newState = restaurants(currentState, action);
 
-        const mockData = {
-            id: "5omTFSOBYiTqeiDwhiBx",
-            photoUrl: 'test',
-            name: "Bibsfiha queijo",
-            description: "Esfiha deliciosa, receita secreta do Habibs.",
-            category: "Salgado",
-            price: 1,
-            quantity: "3"
-        }
+    //Verificação
 
-        const action = addToCart(mockData)
+    expect(newState.cart.products).toHaveLength(1);
+  });
 
-        // Execução
-        const newState = restaurants(currentState, action)
+  test("test de clearCart", () => {
+    // Preparação
+    const currentState = {
+      cart: {
+        products: [],
+      },
+    };
 
-        //Verificação
+    const action = clearCart([]);
 
-        expect(newState.cart.products).toHaveLength(1)
+    // Execução
+    const newState = restaurants(currentState, action);
 
-    })
-    test('test de clearCart', () => {
-        // Preparação
-        const currentState = {
-            cart: {
-                products: [],
-            },
-        }
+    //Verificação
 
-        const action = clearCart([])
+    expect(newState.cart.products).toHaveLength(0);
+  });
+  
+  test("test de refreshCart", () => {
+    // Preparação
+    const currentState = {
+      cart: {
+        products: [],
+      },
+    };
 
-        // Execução
-        const newState = restaurants(currentState, action)
+    const mockData = [
+      {
+        id: "5omTFSOBYiTqeiDwhiBx",
+        photoUrl: "test",
+        name: "Bibsfiha queijo",
+        description: "Esfiha deliciosa, receita secreta do Habibs.",
+        category: "Salgado",
+        price: 1,
+        quantity: "3",
+      },
+    ];
 
-        //Verificação
+    const action = refreshCart(mockData);
 
-        expect(newState.cart.products).toHaveLength(0)
+    // Execução
+    const newState = restaurants(currentState, action);
 
-    })
-    test('test de refreshCart', () => {
-        // Preparação
-        const currentState = {
-            cart: {
-                products: [],
-            },
-        }
+    //Verificação
 
-        const mockData = [
-            {
-                id: "5omTFSOBYiTqeiDwhiBx",
-                photoUrl: 'test',
-                name: "Bibsfiha queijo",
-                description: "Esfiha deliciosa, receita secreta do Habibs.",
-                category: "Salgado",
-                price: 1,
-                quantity: "3"
-            }
-        ]
-
-        const action = refreshCart(mockData)
-
-        // Execução
-        const newState = restaurants(currentState, action)
-
-        //Verificação
-
-        expect(newState.cart.products).toHaveLength(1)
-
-    })
-})
+    expect(newState.cart.products).toHaveLength(1);
+  });
+});

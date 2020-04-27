@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
-import { setRestaurantCategory } from '../../actions/restaurantsActions'
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { setRestaurantCategory } from "../../actions/restaurantsActions";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,41 +35,41 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
 }));
 
-function switchIndex(index){
-  switch(index) {
+function switchIndex(index) {
+  switch (index) {
     case 1:
-      return 'Asiática'
+      return "Asiática";
     case 2:
-      return 'Árabe'
+      return "Árabe";
     case 3:
-      return 'Baiana'
+      return "Baiana";
     case 4:
-      return 'Carnes'
+      return "Carnes";
     case 5:
-      return 'Hamburguer'
+      return "Hamburguer";
     case 6:
-      return 'Italiana'
+      return "Italiana";
     case 7:
-      return 'Petiscos'
+      return "Petiscos";
     case 8:
-      return 'Sorvetes'
+      return "Sorvetes";
     case 0:
-      return 'Todos'
+      return "Todos";
     default:
-      return window.alert("erro")
-    }
+      return window.alert("erro");
+  }
 }
 
 export function ScrollableTabsButtonAuto(props) {
@@ -78,7 +78,7 @@ export function ScrollableTabsButtonAuto(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.getRestaurantsCategory(switchIndex(newValue))
+    props.getRestaurantsCategory(switchIndex(newValue));
   };
 
   return (
@@ -104,13 +104,13 @@ export function ScrollableTabsButtonAuto(props) {
           <Tab label="Sorvetes" {...a11yProps(8)} />
         </Tabs>
       </AppBar>
-      
     </div>
   );
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getRestaurantsCategory: (category) => dispatch(setRestaurantCategory(category)),
-})
+  getRestaurantsCategory: (category) =>
+    dispatch(setRestaurantCategory(category)),
+});
 
 export default connect(null, mapDispatchToProps)(ScrollableTabsButtonAuto);

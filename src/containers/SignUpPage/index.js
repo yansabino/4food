@@ -2,14 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from "../Router/";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FourFood from "../../images/logo-future-eats-invert.svg";
-import {
-  StyledImg,
-  CreateUserContainer,
-  ImgContainer
-} from "../../style/styled";
+import { StyledImg, ImgContainer } from "../../style/styled";
 import AppBarComponent from "../../components/AppBarComponent";
 import FormContainer from "../../components/FormContainer";
 import { userSignup } from "../../actions/user";
@@ -19,55 +13,55 @@ class SignUpPage extends Component {
     super(props);
     this.state = {
       form: {
-        name: '',
-        email: '',
-        cpf: '',
-        password: '',
-        confirmPassword: '',
-      }
+        name: "",
+        email: "",
+        cpf: "",
+        password: "",
+        confirmPassword: "",
+      },
     };
   }
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     const { name, value } = e.target;
     this.setState({ form: { ...this.state.form, [name]: value } });
   };
 
-  onClickToSignup = (e) => {
-    
-    
-    const { name, email, cpf, password, confirmPassword } = this.state.form
-    
+  onClickToSignup = () => {
+    const { name, email, cpf, password, confirmPassword } = this.state.form;
+
     //verifica se o usuário não inseriu apenas um espaço, aou invés de digitar um texto
     const nameIsValid = name && name.trim();
     const emailIsValid = email && email.trim();
     const cpfIsValid = cpf && cpf.trim();
-    
-    if(nameIsValid && emailIsValid && cpfIsValid && password !== ''){
+
+    if (nameIsValid && emailIsValid && cpfIsValid && password !== "") {
       if (password === confirmPassword) {
         const signupData = {
           name,
           email,
           cpf,
-          password
-        }
+          password,
+        };
 
-        this.props.onSignup(signupData)
-        
-        this.setState({form: {
-          name: '',
-          email: '',
-          cpf: '',
-          password: '',
-          confirmPassword: '',
-        }})
+        this.props.onSignup(signupData);
+
+        this.setState({
+          form: {
+            name: "",
+            email: "",
+            cpf: "",
+            password: "",
+            confirmPassword: "",
+          },
+        });
       } else {
-        window.alert("As senhas digitadas são diferentes.")
+        window.alert("As senhas digitadas são diferentes.");
       }
     } else {
-      window.alert("Insira dados válidos.")
+      window.alert("Insira dados válidos.");
     }
-  }
+  };
 
   render() {
     const formSignUpData = [
@@ -79,7 +73,7 @@ class SignUpPage extends Component {
         type: "text",
         value: this.state.form.name,
         onChange: this.handleInputChange,
-        autoComplete: 'name',
+        autoComplete: "name",
       },
       {
         label: "E-mail",
@@ -89,7 +83,7 @@ class SignUpPage extends Component {
         type: "email",
         value: this.state.form.email,
         onChange: this.handleInputChange,
-        autoComplete: 'email',
+        autoComplete: "email",
       },
       {
         label: "CPF",
@@ -117,14 +111,15 @@ class SignUpPage extends Component {
         type: "password",
         value: this.state.form.confirmPassword,
         onChange: this.handleInputChange,
-      }
+      },
     ];
 
     return (
       <div>
         <AppBarComponent
           imageDisplay={true}
-          onClickButton={this.props.goToLoginPage} />
+          onClickButton={this.props.goToLoginPage}
+        />
         <ImgContainer>
           <StyledImg src={FourFood} alt="Logo" />
           <h4>Cadastrar</h4>
@@ -140,10 +135,9 @@ class SignUpPage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  //goToSignUpAddress: () => dispatch(push(routes.signupPageAddress)),
+const mapDispatchToProps = (dispatch) => ({
   goToLoginPage: () => dispatch(push(routes.loginPage)),
-  onSignup: (signupData) => dispatch(userSignup(signupData))
+  onSignup: (signupData) => dispatch(userSignup(signupData)),
 });
 
 export default connect(null, mapDispatchToProps)(SignUpPage);

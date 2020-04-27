@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 import Clock from "../../images/clock.svg";
 
 const CardContainer = styled.div`
@@ -9,16 +9,16 @@ const CardContainer = styled.div`
   background: #e8222e;
   display: flex;
   align-items: center;
-`
+`;
 
 const Image = styled.div`
   width: 22.22vw;
   text-align: center;
-`
+`;
 
 const Info = styled.div`
   width: 78.88vw;
-`
+`;
 
 const Confirmation = styled.p`
   width: 256px;
@@ -29,10 +29,10 @@ const Confirmation = styled.p`
   color: #ffffff;
   margin-block-start: 24px;
   margin-block-end: 8px;
-`
+`;
 
 const Name = styled.p`
-width: 256px;
+  width: 256px;
   height: 18px;
   font-family: Montserrat;
   font-size: 16px;
@@ -44,7 +44,7 @@ width: 256px;
   color: #000000;
   margin-block-start: 8px;
   margin-block-end: 8px;
-`
+`;
 
 const Subtotal = styled.p`
   width: 256px;
@@ -59,14 +59,13 @@ const Subtotal = styled.p`
   color: #000000;
   margin-block-start: 8px;
   margin-block-end: 24px;
-`
-
+`;
 
 function OrderCard(props) {
   return (
     <CardContainer>
       <Image>
-        <img src={Clock} />
+        <img src={Clock} alt="clock" />
       </Image>
       <Info>
         <Confirmation>Pedido em andamento</Confirmation>

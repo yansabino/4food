@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledAppBar } from "../../style/styled";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Title = styled.p`
   width: 91px;

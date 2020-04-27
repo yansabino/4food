@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledAppBar, StyledBackImg } from "../../style/styled";
 import BackButton from "../../images/back.svg";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Title = styled.p`
   width: 300px;
@@ -14,10 +14,12 @@ const Title = styled.p`
 
 export function AppBarComponent(props) {
   return (
-      <StyledAppBar color="inherit" position="static">
-        {props.imageDisplay && <StyledBackImg src={BackButton} onClick={props.onClickButton} />}
-        <Title>{props.title}</Title>
-      </StyledAppBar>
+    <StyledAppBar color="inherit" position="static">
+      {props.imageDisplay && (
+        <StyledBackImg src={BackButton} onClick={props.onClickButton} />
+      )}
+      <Title>{props.title}</Title>
+    </StyledAppBar>
   );
 }
 

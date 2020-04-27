@@ -3,26 +3,25 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from "../Router/";
 import Button from "@material-ui/core/Button";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 import FourFood from "../../images/logo-future-eats-invert.svg";
-import { ImageLogo, FontEnter } from "./style"
-import { userLogin } from "../../actions/user"
+import { ImageLogo, FontEnter } from "./style";
+import { userLogin } from "../../actions/user";
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -30,36 +29,34 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 export function LoginPage(props) {
   const classes = useStyles();
 
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
 
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState("");
 
-  const handleInputEmail = event => {
+  const handleInputEmail = (event) => {
     setEmail(event.target.value);
   };
 
-  
-  const handleInputPassword = event => {
+  const handleInputPassword = (event) => {
     setPassword(event.target.value);
   };
 
-  const handleOnSubmit = (event)=>{
-    event.preventDefault()
-    props.login(email, password)
-  }
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    props.login(email, password);
+  };
 
-  let pageToRender
-  if (window.localStorage.getItem('token')) {
-    props.goToRestaurantFeed()
+  let pageToRender;
+  if (window.localStorage.getItem("token")) {
+    props.goToRestaurantFeed();
   } else {
     pageToRender = (
       <div>
         <ImageLogo>
-          <img src={FourFood}/>
+          <img src={FourFood} alt="4foodLogo" />
         </ImageLogo>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -92,27 +89,31 @@ export function LoginPage(props) {
                 autoComplete="current-password"
                 onChange={handleInputPassword}
               />
-              
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                style={{ background:"#e8222e" }}
+                style={{ background: "#e8222e" }}
                 className={classes.submit}
                 onClick={handleOnSubmit}
               >
                 Entrar
               </Button>
-            </form>  
-            
-            <Grid 
+            </form>
+
+            <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
             >
               <Grid item>
-                <Link  onClick={props.goToSignUp} variant="body2" color="inherit">
+                <Link
+                  onClick={props.goToSignUp}
+                  variant="body2"
+                  color="inherit"
+                >
                   Não possui cadastro? Clique aqui.
                 </Link>
               </Grid>
@@ -120,21 +121,16 @@ export function LoginPage(props) {
           </div>
         </Container>
       </div>
-    )
+    );
   }
-  
-  return (
-    <div>
-      {pageToRender}
-    </div>
-    
-  );
+
+  return <div>{pageToRender}</div>;
 }
 
-export const mapDispatchToProps = (dispatch) =>({
+export const mapDispatchToProps = (dispatch) => ({
   goToSignUp: () => dispatch(push(routes.signupPage)),
   goToRestaurantFeed: () => dispatch(push(routes.restaurantFeed)),
-  login: (email, password)=> dispatch(userLogin(email, password))
-})
+  login: (email, password) => dispatch(userLogin(email, password)),
+});
 
 export default connect(null, mapDispatchToProps)(LoginPage);

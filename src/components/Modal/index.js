@@ -2,9 +2,9 @@ import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import styled from "styled-components";
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/restaurantsActions";
 
@@ -27,14 +27,14 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 300,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #cccccc',
+    border: "2px solid #cccccc",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -43,21 +43,20 @@ export function ModalPopUp(props) {
 
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(props.openPopUp);
-  const [quantity, setQuantity] = React.useState("0")
-
+  const [quantity, setQuantity] = React.useState("0");
 
   const handleClose = () => {
-    const products = { ...props.product, quantity }
+    const products = { ...props.product, quantity };
     if (quantity > 0) {
-      props.addToCart(products)
+      props.addToCart(products);
     }
     setOpen(false);
-    props.changeDisplayState()
+    props.changeDisplayState();
   };
 
   const handleSelect = (e) => {
-    setQuantity(e.target.value)
-  }
+    setQuantity(e.target.value);
+  };
 
   return (
     <div>
@@ -95,8 +94,8 @@ export function ModalPopUp(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  addToCart: (products) => dispatch(addToCart(products))
-})
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (products) => dispatch(addToCart(products)),
+});
 
 export default connect(null, mapDispatchToProps)(ModalPopUp);

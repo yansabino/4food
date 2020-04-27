@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from "../Router/";
 import Footer from "../../components/Footer";
-import FormControl from '@material-ui/core/FormControl';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import AppBarComponent from "../../components/AppBarComponent"
-import { FormButton } from "../../components/Form"
-import Container from '@material-ui/core/Container';
+import FormControl from "@material-ui/core/FormControl";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import AppBarComponent from "../../components/AppBarComponent";
+import { FormButton } from "../../components/Form";
+import Container from "@material-ui/core/Container";
 import {
   WrapperAddress,
   FontAddressTitle,
@@ -22,7 +22,7 @@ import {
   LineHr,
   WrapperRadioButton,
   WrapperButtonConfirm,
-  WrapperMain
+  WrapperMain,
 } from "./style";
 import styled from "styled-components";
 import { getProfile } from "../../actions/user";
@@ -177,48 +177,50 @@ class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      payment: '',
+      payment: "",
     };
   }
 
-  handleChange = event => {
-    this.setState({ payment: event.target.value })
-  }
+  handleChange = (event) => {
+    this.setState({ payment: event.target.value });
+  };
 
   componentDidMount() {
-    const token = window.localStorage.getItem("token")
+    const token = window.localStorage.getItem("token");
     if (token === null) {
-      this.props.goToLoginPage()
+      this.props.goToLoginPage();
     } else {
       this.props.fetchUsers();
     }
   }
 
   onOrder = () => {
-    const productsToOrder = this.props.cart.products.map ( product => ({
+    const productsToOrder = this.props.cart.products.map((product) => ({
       id: product.id,
-      quantity: product.quantity
-    }))
+      quantity: product.quantity,
+    }));
     const orderData = {
       products: productsToOrder,
-      paymentMethod: this.state.payment
-    }
-    if (this.state.payment === '' ) {
-      window.alert("Selecione o método de pagamento.")
+      paymentMethod: this.state.payment,
+    };
+    if (this.state.payment === "") {
+      window.alert("Selecione o método de pagamento.");
     } else {
-      this.props.onPlaceOrder(orderData, this.props.restaurantData.id)
+      this.props.onPlaceOrder(orderData, this.props.restaurantData.id);
     }
-  }
+  };
 
-  onRemoveItem(itemId){
-    const itemIndex = this.props.cart.products.findIndex( product => product.id === itemId)
-    this.props.cart.products.splice(itemIndex, 1)
-    this.props.onRemoveItemOfCart(this.props.cart.products)
+  onRemoveItem(itemId) {
+    const itemIndex = this.props.cart.products.findIndex(
+      (product) => product.id === itemId
+    );
+    this.props.cart.products.splice(itemIndex, 1);
+    this.props.onRemoveItemOfCart(this.props.cart.products);
   }
 
   render() {
-    const { restaurantData, userInformation } = this.props
-    const { products } = this.props.cart
+    const { restaurantData, userInformation } = this.props;
+    const { products } = this.props.cart;
 
     return (
       <div>
@@ -229,7 +231,7 @@ class Cart extends React.Component {
             <FontAddressUser>{userInformation.address}</FontAddressUser>
           </WrapperAddress>
 
-          {products.length !== 0 &&
+          {products.length !== 0 && (
             <Card>
               <Info>
                 <Name>{restaurantData.name}</Name>
@@ -238,53 +240,84 @@ class Cart extends React.Component {
                 </OtherInfoContainer>
                 <OtherInfoContainer>
                   <OtherInfo>
-                    {restaurantData.deliveryTime} - {restaurantData.deliveryTime + 10} min
+                    {restaurantData.deliveryTime} -{" "}
+                    {restaurantData.deliveryTime + 10} min
                   </OtherInfo>
                 </OtherInfoContainer>
               </Info>
             </Card>
-          }
+          )}
 
-          <Container component="main" >
-            {products.length === 0 ? <TextCart>Carrinho vazio</TextCart> :
+          <Container component="main">
+            {products.length === 0 ? (
+              <TextCart>Carrinho vazio</TextCart>
+            ) : (
               <RestaurantItemCardContainer>
-                {products.map(item => {
+                {products.map((item) => {
                   return (
                     <CardContainer>
                       <StyledImg src={item.photoUrl} />
                       <InfoContainer>
                         <ItemName>{item.name}</ItemName>
                         <ItemNDescription>{item.description}</ItemNDescription>
-                        <ItemPrice>R$ {Number(item.price*item.quantity).toFixed(2)}</ItemPrice>
+                        <ItemPrice>
+                          R$ {Number(item.price * item.quantity).toFixed(2)}
+                        </ItemPrice>
                       </InfoContainer>
                       <RightContainer>
                         <QuantitySelected>{item.quantity}</QuantitySelected>
-                        <CardButton type="submit" variant="contained" onClick={() => this.onRemoveItem(item.id)}>remover</CardButton>
+                        <CardButton
+                          type="submit"
+                          variant="contained"
+                          onClick={() => this.onRemoveItem(item.id)}
+                        >
+                          remover
+                        </CardButton>
                       </RightContainer>
                     </CardContainer>
-                  )
+                  );
                 })}
-              </RestaurantItemCardContainer>}
+              </RestaurantItemCardContainer>
+            )}
             <FreightPrice>
-              Frete R$ {products.length !== 0 ? Number(restaurantData.shipping).toFixed(2) : "0.00"}
+              Frete R${" "}
+              {products.length !== 0
+                ? Number(restaurantData.shipping).toFixed(2)
+                : "0.00"}
             </FreightPrice>
             <WrapperPrice>
               <TitleDivPrice>SUBTOTAL</TitleDivPrice>
               <TotalPrice>
-                R$ {products.length !== 0 ?
-                  Number(
-                    products.reduce((acumulator, actualValue) => acumulator + (actualValue.quantity*actualValue.price), restaurantData.shipping)
-                  ).toFixed(2) :
-                  '0.00'
-                }
+                R${" "}
+                {products.length !== 0
+                  ? Number(
+                      products.reduce(
+                        (acumulator, actualValue) =>
+                          acumulator + actualValue.quantity * actualValue.price,
+                        restaurantData.shipping
+                      )
+                    ).toFixed(2)
+                  : "0.00"}
               </TotalPrice>
             </WrapperPrice>
             <FormOfPayment>Forma de pagamento</FormOfPayment>
             <LineHr />
             <FormControl>
-              <WrapperRadioButton name="payment" value={this.state.payment} onChange={this.handleChange}>
-                <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-                <FormControlLabel value="creditCard" control={<Radio />} label="Cartão de crédito" />
+              <WrapperRadioButton
+                name="payment"
+                value={this.state.payment}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  value="money"
+                  control={<Radio />}
+                  label="Dinheiro"
+                />
+                <FormControlLabel
+                  value="creditCard"
+                  control={<Radio />}
+                  label="Cartão de crédito"
+                />
               </WrapperRadioButton>
             </FormControl>
             <WrapperButtonConfirm>
@@ -309,19 +342,21 @@ class Cart extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cart: state.restaurants.cart,
   userInformation: state.users.allUsers,
   restaurantData: state.restaurants.restaurantDetails,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   goToRestaurantFeed: () => dispatch(push(routes.restaurantFeed)),
   goToUserProfile: () => dispatch(push(routes.userProfile)),
   goToLoginPage: () => dispatch(push(routes.loginPage)),
   fetchUsers: () => dispatch(getProfile()),
-  onPlaceOrder: (orderData, restaurantId) => dispatch(placeOrder(orderData, restaurantId)),
-  onRemoveItemOfCart: (newProductsList) => dispatch(refreshCart(newProductsList)),
-})
+  onPlaceOrder: (orderData, restaurantId) =>
+    dispatch(placeOrder(orderData, restaurantId)),
+  onRemoveItemOfCart: (newProductsList) =>
+    dispatch(refreshCart(newProductsList)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -54,17 +54,19 @@ const OtherInfo = styled.div`
 `;
 
 function RestaurantCard(props) {
-  const goToRestaurantDetails = restaurantId => {
+  const goToRestaurantDetails = (restaurantId) => {
     props.getRestaurantDetails(restaurantId);
   };
 
   return (
     <Card
-      onClick={() => {goToRestaurantDetails(props.id)}}
+      onClick={() => {
+        goToRestaurantDetails(props.id);
+      }}
     >
       <Image>
         {/* se tivermos tempo, aprender o canvas */}
-        <Img src={props.restaurantImg} />
+        <Img src={props.restaurantImg} alt="restaurant image" />
       </Image>
       <Info>
         <Name>{props.restaurantName}</Name>
@@ -72,16 +74,18 @@ function RestaurantCard(props) {
           <OtherInfo>
             {props.restaurantTime} - {props.restaurantTime + 10} min
           </OtherInfo>
-          <OtherInfo>Frete R$ {Number(props.restaurantShipping).toFixed(2)}</OtherInfo>
+          <OtherInfo>
+            Frete R$ {Number(props.restaurantShipping).toFixed(2)}
+          </OtherInfo>
         </OtherInfoContainer>
       </Info>
     </Card>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
-  getRestaurantDetails: restaurantId =>
-    dispatch(fetchRestaurantsDetails(restaurantId))
+const mapDispatchToProps = (dispatch) => ({
+  getRestaurantDetails: (restaurantId) =>
+    dispatch(fetchRestaurantsDetails(restaurantId)),
 });
 
 export default connect(null, mapDispatchToProps)(RestaurantCard);

@@ -5,7 +5,6 @@ export const StyledImg = styled.img`
   width: 104px;
   height: 58px;
   object-fit: contain;
-  
 `;
 
 export const ImgContainer = styled.div`
@@ -13,8 +12,8 @@ export const ImgContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 55px;
-  justify-content:center;
-`
+  justify-content: center;
+`;
 
 export const StyledAppBar = styled(AppBar)`
   width: 360px;

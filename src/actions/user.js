@@ -2,7 +2,8 @@ import axios from "axios";
 import { push } from "connected-react-router";
 import { routes } from "../containers/Router";
 
-export const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/FourFoodA";
+export const baseUrl =
+  "https://us-central1-missao-newton.cloudfunctions.net/FourFoodA";
 
 const token = window.localStorage.getItem("token");
 const requestHeader = {

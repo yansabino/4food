@@ -4,7 +4,6 @@ import { push, goBack } from "connected-react-router";
 import { routes } from "../Router/";
 import AppBarComponent from "../../components/AppBarComponent";
 import styled from "styled-components";
-import { fetchRestaurantsDetails } from "../../actions/restaurantsActions";
 import { RestaurantItemCard } from "./../../components/RestaurantItemCard";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import ModalPopUp from "../../components/Modal";
@@ -72,7 +71,7 @@ class RestaurantDetails extends Component {
     super(props);
     this.state = {
       modalDisplay: false,
-      productData: ""
+      productData: "",
     };
   }
 
@@ -90,7 +89,6 @@ class RestaurantDetails extends Component {
     this.setState({
       modalDisplay: !this.state.modalDisplay,
       productData: item,
-
     });
   };
 
@@ -101,27 +99,27 @@ class RestaurantDetails extends Component {
     }
 
     //Pegar todas as categorias de produtos do restaurante
-    const allCategories = this.props.selectRestaurant.products.map(el => {
+    const allCategories = this.props.selectRestaurant.products.map((el) => {
       return el.category;
     });
 
     //Eliminar as categorias repetidas
     const uniqueCategories = Array.from(new Set(allCategories));
-    
+
     //Pegar os produtos de cada categoria, retornando um objeto com a categoria e o array de produtos
-    const categoryItens = uniqueCategories.map(category => {
+    const categoryItens = uniqueCategories.map((category) => {
       const itensOfCategory = this.props.selectRestaurant.products.filter(
-        item => {
+        (item) => {
           return item.category === category;
         }
       );
       return {
         category,
-        itens: itensOfCategory
+        itens: itensOfCategory,
       };
     });
 
-    const { selectRestaurant } = this.props
+    const { selectRestaurant } = this.props;
 
     return (
       <div>
@@ -142,7 +140,8 @@ class RestaurantDetails extends Component {
               </OtherInfoContainer>
               <OtherInfoContainer>
                 <OtherInfo>
-                  {selectRestaurant.deliveryTime} - {selectRestaurant.deliveryTime + 10} min
+                  {selectRestaurant.deliveryTime} -{" "}
+                  {selectRestaurant.deliveryTime + 10} min
                 </OtherInfo>
                 <OtherInfo>
                   Frete R$ {Number(selectRestaurant.shipping).toFixed(2)}
@@ -154,32 +153,32 @@ class RestaurantDetails extends Component {
             </Info>
           </Card>
         </Container>
-        {categoryItens.map(item => (
-            <RestaurantItemCard
-              itemData={item}
-              onClickAdd={this.handleModalDisplay}
-            />
+        {categoryItens.map((item) => (
+          <RestaurantItemCard
+            itemData={item}
+            onClickAdd={this.handleModalDisplay}
+          />
         ))}
-        {this.state.modalDisplay &&
+        {this.state.modalDisplay && (
           <ModalPopUp
             idRestaurant={selectRestaurant.id}
             product={this.state.productData}
             changeDisplayState={this.handleModalDisplay}
             openPopUp={this.state.modalDisplay}
           />
-        }
+        )}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   goBackPage: () => dispatch(goBack()),
-  goToLoginPage: () => dispatch(push(routes.loginPage))
+  goToLoginPage: () => dispatch(push(routes.loginPage)),
 });
 
 const mapStateToProps = (state) => ({
-    selectRestaurant: state.restaurants.restaurantDetails,
-})
+  selectRestaurant: state.restaurants.restaurantDetails,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(RestaurantDetails);

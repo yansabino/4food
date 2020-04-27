@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import burguerImg from "./../../images/burguer.png";
 import Divider from "@material-ui/core/Divider";
-import { useState } from "react";
 
 const RestaurantItemCardContainer = styled.div`
   width: 328px;
@@ -115,7 +113,7 @@ export function RestaurantItemCard(props) {
     <RestaurantItemCardContainer>
       <ItemCategory>{props.itemData.category}</ItemCategory>
       <HR></HR>
-      {props.itemData.itens.map(item => {
+      {props.itemData.itens.map((item) => {
         return (
           <CardContainer>
             <StyledImg src={item.photoUrl} />

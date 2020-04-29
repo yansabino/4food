@@ -36,7 +36,7 @@ export function UserProfile(props) {
       props.goToLoginPage();
     } else {
       props.fetchUsers();
-      props.fecthOrders();
+      props.fetchOrders();
     }
   }, []);
 
@@ -93,7 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
   goToRestaurantFeed: () => dispatch(push(routes.restaurantFeed)),
   goToCart: () => dispatch(push(routes.cart)),
   fetchUsers: () => dispatch(getProfile()),
-  fecthOrders: () => dispatch(fetchOrdersHistory()),
+  fetchOrders: () => dispatch(fetchOrdersHistory()),
   goToEditUserAddress: () => dispatch(push(routes.editUserAddress)),
   goToEditUserProfile: () => dispatch(push(routes.editUserProfile)),
   goToLoginPage: () => dispatch(push(routes.loginPage)),

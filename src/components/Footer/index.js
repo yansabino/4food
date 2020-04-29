@@ -33,9 +33,9 @@ export function Footer(props) {
 
   return (
     <ContainerFooter color="primary">
-      <img onClick={props.goToRestaurantFeed} src={HomeIcon} />
-      <img onClick={props.goToCart} src={CartIcon} />
-      <img onClick={props.goToUserProfile} src={UserIcon} />
+      <img onClick={props.goToRestaurantFeed} src={HomeIcon} alt="home" />
+      <img onClick={props.goToCart} src={CartIcon} alt="cart" />
+      <img onClick={props.goToUserProfile} src={UserIcon} alt="user" />
     </ContainerFooter>
   );
 }

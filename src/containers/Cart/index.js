@@ -221,7 +221,7 @@ class Cart extends React.Component {
   render() {
     const { restaurantData, userInformation } = this.props;
     const { products } = this.props.cart;
-
+    console.log(products)
     return (
       <div>
         <AppBarComponent imageDisplay={false} title="Meu carrinho" />
@@ -346,6 +346,7 @@ const mapStateToProps = (state) => ({
   cart: state.restaurants.cart,
   userInformation: state.users.allUsers,
   restaurantData: state.restaurants.restaurantDetails,
+  orders: state.users.allOrders
 });
 
 const mapDispatchToProps = (dispatch) => ({

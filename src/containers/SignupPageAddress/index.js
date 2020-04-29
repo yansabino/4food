@@ -66,7 +66,7 @@ class SignUpPageAddress extends Component {
         state,
         complement,
       };
-
+      console.log(addressData)
       this.props.onSaveAddress(addressData);
 
       this.setState({

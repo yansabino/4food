@@ -314,7 +314,7 @@ class Cart extends React.Component {
                   label="Dinheiro"
                 />
                 <FormControlLabel
-                  value="creditCard"
+                  value="creditcard"
                   control={<Radio />}
                   label="Cartão de crédito"
                 />

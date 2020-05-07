@@ -19,6 +19,7 @@ export const userLogin = (email, password) => async (dispatch) => {
   };
   try {
     const response = await axios.post(`${baseUrl}/login`, login);
+
     window.localStorage.setItem("token", response.data.token);
     if (response.data.user.hasAddress === false) {
       window.alert(

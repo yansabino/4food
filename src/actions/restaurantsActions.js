@@ -56,16 +56,17 @@ export const refreshCart = (products) => ({
 const baseUrl =
   "https://us-central1-missao-newton.cloudfunctions.net/FourFoodA";
 
-const token = window.localStorage.getItem("token");
-const requestHeader = {
+const token = () => window.localStorage.getItem("token");
+const requestHeader = () => ({
   headers: {
-    auth: token,
+    auth: token(),
   },
-};
+});
 
 export const fetchRestaurants = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${baseUrl}/restaurants`, requestHeader);
+    
+    const response = await axios.get(`${baseUrl}/restaurants`, requestHeader());
     dispatch(setRestaurantAction(response.data.restaurants));
   } catch (error) {
     window.alert(error.response.data.message);
@@ -76,7 +77,7 @@ export const fetchRestaurantsDetails = (restaurantId) => async (dispatch) => {
   try {
     const response = await axios.get(
       `${baseUrl}/restaurants/${restaurantId}`,
-      requestHeader
+      requestHeader()
     );
     dispatch(setRestaurantDetails(response.data.restaurant));
     dispatch(push(routes.restaurantDetails));
@@ -90,7 +91,7 @@ export const placeOrder = (orderData, restaurantId) => async (dispatch) => {
     await axios.post(
       `${baseUrl}/restaurants/${restaurantId}/order`,
       orderData,
-      requestHeader
+      requestHeader()
     );
     window.alert("Pedido enviado com sucesso");
     dispatch(clearCart());

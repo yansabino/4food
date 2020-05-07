@@ -40,6 +40,7 @@ class RestaurantFeed extends Component {
 
   componentDidMount() {
     const token = window.localStorage.getItem("token");
+    console.log(token)
     if (token === null) {
       this.props.goToLoginPage();
     } else {

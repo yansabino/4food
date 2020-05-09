@@ -50,9 +50,8 @@ export function LoginPage(props) {
   };
 
   let pageToRender;
-  if (window.localStorage.getItem("token")) {
-    props.goToRestaurantFeed();
-  } else {
+
+  window.localStorage.getItem("token") ? props.goToRestaurantFeed() :
     pageToRender = (
       <div>
         <ImageLogo>
@@ -62,7 +61,7 @@ export function LoginPage(props) {
           <CssBaseline />
           <div className={classes.paper}>
             <FontEnter>Entrar</FontEnter>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={handleOnSubmit} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -96,7 +95,6 @@ export function LoginPage(props) {
                 variant="contained"
                 style={{ background: "#e8222e" }}
                 className={classes.submit}
-                onClick={handleOnSubmit}
               >
                 Entrar
               </Button>
@@ -114,7 +112,7 @@ export function LoginPage(props) {
                   variant="body2"
                   color="inherit"
                 >
-                  Não possui cadastro? Clique aqui.
+                  Não possui cadastro? <b>Clique aqui</b>
                 </Link>
               </Grid>
             </Grid>
@@ -122,7 +120,7 @@ export function LoginPage(props) {
         </Container>
       </div>
     );
-  }
+  
 
   return <div>{pageToRender}</div>;
 }

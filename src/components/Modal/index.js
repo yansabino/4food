@@ -49,6 +49,7 @@ export function ModalPopUp(props) {
     const products = { ...props.product, quantity };
     if (quantity > 0) {
       props.addToCart(products);
+      window.alert("Produto(os) adicionado(os) no carrinho")
     }
     setOpen(false);
     props.changeDisplayState();

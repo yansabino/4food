@@ -13,7 +13,7 @@ Sobre a divisão dos arquivos, há dois grandes setores. Os `components` são os
 - Fazer a navegação entre a home page, carrinho e perfil do usuário.
 
 - Link para acessar o App: [Site](http://superficial-memory.surge.sh/)
-OBS: O app foi desenhado para ser Mobile, então é ideal abrir o link em dispositiveis móveis.
+- OBS: O app foi desenhado para ser Mobile, então é ideal abrir o link em dispositiveis móveis.
 
 ## Instruções para rodar
 Por ser um projeto com ReactJS, há a necessidade do NodeJS. 
